@@ -1,0 +1,359 @@
+[
+    {
+        "label": "random",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "random",
+        "description": "random",
+        "detail": "random",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "cv2",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "cv2",
+        "description": "cv2",
+        "detail": "cv2",
+        "documentation": {}
+    },
+    {
+        "label": "numpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "numpy",
+        "description": "numpy",
+        "detail": "numpy",
+        "documentation": {}
+    },
+    {
+        "label": "pandas",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "nltk",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "nltk",
+        "description": "nltk",
+        "detail": "nltk",
+        "documentation": {}
+    },
+    {
+        "label": "PorterStemmer",
+        "importPath": "nltk.stem",
+        "description": "nltk.stem",
+        "isExtraImport": true,
+        "detail": "nltk.stem",
+        "documentation": {}
+    },
+    {
+        "label": "CountVectorizer",
+        "importPath": "sklearn.feature_extraction.text",
+        "description": "sklearn.feature_extraction.text",
+        "isExtraImport": true,
+        "detail": "sklearn.feature_extraction.text",
+        "documentation": {}
+    },
+    {
+        "label": "cosine_similarity",
+        "importPath": "sklearn.metrics.pairwise",
+        "description": "sklearn.metrics.pairwise",
+        "isExtraImport": true,
+        "detail": "sklearn.metrics.pairwise",
+        "documentation": {}
+    },
+    {
+        "label": "pickle",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pickle",
+        "description": "pickle",
+        "detail": "pickle",
+        "documentation": {}
+    },
+    {
+        "label": "SupportBot",
+        "kind": 6,
+        "importPath": "Chatbot",
+        "description": "Chatbot",
+        "peekOfCode": "class SupportBot:\n    negative_res = (\"no\", \"nope\", \"nay\", \"not a chance\", \"sorry\")\n    exit_commands = (\"quit\", \"pause\", \"exit\", \"goodbye\", \"bye\", \"farewell\")\n    def _init_(self):\n        self.support_responses = {\n            'ask_about_product': r'.\\s*product.',\n            'technical_support': r'.technical.*support.',\n            'about_returns': r'.\\s*return policy.',\n            'general_query': r'.how.*help.'\n        }",
+        "detail": "Chatbot",
+        "documentation": {}
+    },
+    {
+        "label": "bot",
+        "kind": 5,
+        "importPath": "Chatbot",
+        "description": "Chatbot",
+        "peekOfCode": "bot = SupportBot()\nbot.greet()",
+        "detail": "Chatbot",
+        "documentation": {}
+    },
+    {
+        "label": "face_detector",
+        "kind": 5,
+        "importPath": "FaceDetection",
+        "description": "FaceDetection",
+        "peekOfCode": "face_detector = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')\n# Load pre-trained face recognition model (e.g., ArcFace or Siamese network)\n# Capture video from webcam\ncap = cv2.VideoCapture(0)\nwhile True:\n    # Read frame from webcam\n    ret, frame = cap.read()\n    if not ret:\n        break\n    # Convert frame to grayscale for Haar cascade face detection",
+        "detail": "FaceDetection",
+        "documentation": {}
+    },
+    {
+        "label": "cap",
+        "kind": 5,
+        "importPath": "FaceDetection",
+        "description": "FaceDetection",
+        "peekOfCode": "cap = cv2.VideoCapture(0)\nwhile True:\n    # Read frame from webcam\n    ret, frame = cap.read()\n    if not ret:\n        break\n    # Convert frame to grayscale for Haar cascade face detection\n    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)\n    # Detect faces using Haar cascade classifier\n    faces = face_detector.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))",
+        "detail": "FaceDetection",
+        "documentation": {}
+    },
+    {
+        "label": "stem",
+        "kind": 2,
+        "importPath": "Recsystem",
+        "description": "Recsystem",
+        "peekOfCode": "def stem(text):\n    y = []\n    for i in text.split():\n        y.append(ps.stem(i))\n    return \" \".join(y)\nnew_df['tags'] = new_df['tags'].apply(stem)\nvectors = cv.fit_transform(new_df['tags']).toarray()\n# Fixing indentation and syntax errors in the code block\nsimilarity = cosine_similarity(vectors)\nprint(similarity[1])",
+        "detail": "Recsystem",
+        "documentation": {}
+    },
+    {
+        "label": "recommended",
+        "kind": 2,
+        "importPath": "Recsystem",
+        "description": "Recsystem",
+        "peekOfCode": "def recommended(medicine):\n    medicine_index = new_df[new_df['Drug, Name'] == medicine].index[0]\n    distances = similarity[medicine_index]\n    medicines_list = sorted(list(enumerate(distances)), reverse=True, key=lambda x: x[1])[1:6]\n    for i in medicines_list:\n        print(new_df.iloc[i[0]]['Drug, Name'])\nrecommended(\"MontekLC 75mg Syrup 60mlMontekLC 500mg Tablet 10's\")\n# Correcting import statement for PorterStemmer\nimport pickle\n# Correcting variable name and fixing syntax errors",
+        "detail": "Recsystem",
+        "documentation": {}
+    },
+    {
+        "label": "medicines",
+        "kind": 5,
+        "importPath": "Recsystem",
+        "description": "Recsystem",
+        "peekOfCode": "medicines = pd.read_csv('/kaggle/input/medicine/medicine.csv')\nmedicines.head()\nmedicines.shape\nmedicines.isnull().sum()\nmedicines.dropna(inplace=True)\nmedicines.duplicated().sum()\nmedicines['Description'] = medicines['Description'].apply(lambda x: x.split())\nmedicines['Reason'] = medicines['Reason'].apply(lambda x: x.split())\nmedicines['Description'] = medicines['Description'].apply(lambda x: [i.replace(\" \", \"\") for i in x])\nmedicines['Description'] = medicines['Description'].apply(lambda x: [i.replace(\"\", \"\") for i in x])  # Corrected this line",
+        "detail": "Recsystem",
+        "documentation": {}
+    },
+    {
+        "label": "medicines['Description']",
+        "kind": 5,
+        "importPath": "Recsystem",
+        "description": "Recsystem",
+        "peekOfCode": "medicines['Description'] = medicines['Description'].apply(lambda x: x.split())\nmedicines['Reason'] = medicines['Reason'].apply(lambda x: x.split())\nmedicines['Description'] = medicines['Description'].apply(lambda x: [i.replace(\" \", \"\") for i in x])\nmedicines['Description'] = medicines['Description'].apply(lambda x: [i.replace(\"\", \"\") for i in x])  # Corrected this line\nmedicines['tags'] = medicines['Description'] + medicines['Reason']\nnew_df = medicines[['index', 'Drug, Name', 'tags']]\nnew_df['tags'] = new_df['tags'].apply(lambda x: \" \".join(x))\nnew_df['tags'] = new_df['tags'].apply(lambda x: x.lower())\n# Fixing import statement for PorterStemmer\nps = PorterStemmer()",
+        "detail": "Recsystem",
+        "documentation": {}
+    },
+    {
+        "label": "medicines['Reason']",
+        "kind": 5,
+        "importPath": "Recsystem",
+        "description": "Recsystem",
+        "peekOfCode": "medicines['Reason'] = medicines['Reason'].apply(lambda x: x.split())\nmedicines['Description'] = medicines['Description'].apply(lambda x: [i.replace(\" \", \"\") for i in x])\nmedicines['Description'] = medicines['Description'].apply(lambda x: [i.replace(\"\", \"\") for i in x])  # Corrected this line\nmedicines['tags'] = medicines['Description'] + medicines['Reason']\nnew_df = medicines[['index', 'Drug, Name', 'tags']]\nnew_df['tags'] = new_df['tags'].apply(lambda x: \" \".join(x))\nnew_df['tags'] = new_df['tags'].apply(lambda x: x.lower())\n# Fixing import statement for PorterStemmer\nps = PorterStemmer()\n# Fixing import statement for CountVectorizer",
+        "detail": "Recsystem",
+        "documentation": {}
+    },
+    {
+        "label": "medicines['Description']",
+        "kind": 5,
+        "importPath": "Recsystem",
+        "description": "Recsystem",
+        "peekOfCode": "medicines['Description'] = medicines['Description'].apply(lambda x: [i.replace(\" \", \"\") for i in x])\nmedicines['Description'] = medicines['Description'].apply(lambda x: [i.replace(\"\", \"\") for i in x])  # Corrected this line\nmedicines['tags'] = medicines['Description'] + medicines['Reason']\nnew_df = medicines[['index', 'Drug, Name', 'tags']]\nnew_df['tags'] = new_df['tags'].apply(lambda x: \" \".join(x))\nnew_df['tags'] = new_df['tags'].apply(lambda x: x.lower())\n# Fixing import statement for PorterStemmer\nps = PorterStemmer()\n# Fixing import statement for CountVectorizer\ncv = CountVectorizer(stop_words='english', max_features=5000)",
+        "detail": "Recsystem",
+        "documentation": {}
+    },
+    {
+        "label": "medicines['Description']",
+        "kind": 5,
+        "importPath": "Recsystem",
+        "description": "Recsystem",
+        "peekOfCode": "medicines['Description'] = medicines['Description'].apply(lambda x: [i.replace(\"\", \"\") for i in x])  # Corrected this line\nmedicines['tags'] = medicines['Description'] + medicines['Reason']\nnew_df = medicines[['index', 'Drug, Name', 'tags']]\nnew_df['tags'] = new_df['tags'].apply(lambda x: \" \".join(x))\nnew_df['tags'] = new_df['tags'].apply(lambda x: x.lower())\n# Fixing import statement for PorterStemmer\nps = PorterStemmer()\n# Fixing import statement for CountVectorizer\ncv = CountVectorizer(stop_words='english', max_features=5000)\ndef stem(text):",
+        "detail": "Recsystem",
+        "documentation": {}
+    },
+    {
+        "label": "medicines['tags']",
+        "kind": 5,
+        "importPath": "Recsystem",
+        "description": "Recsystem",
+        "peekOfCode": "medicines['tags'] = medicines['Description'] + medicines['Reason']\nnew_df = medicines[['index', 'Drug, Name', 'tags']]\nnew_df['tags'] = new_df['tags'].apply(lambda x: \" \".join(x))\nnew_df['tags'] = new_df['tags'].apply(lambda x: x.lower())\n# Fixing import statement for PorterStemmer\nps = PorterStemmer()\n# Fixing import statement for CountVectorizer\ncv = CountVectorizer(stop_words='english', max_features=5000)\ndef stem(text):\n    y = []",
+        "detail": "Recsystem",
+        "documentation": {}
+    },
+    {
+        "label": "new_df",
+        "kind": 5,
+        "importPath": "Recsystem",
+        "description": "Recsystem",
+        "peekOfCode": "new_df = medicines[['index', 'Drug, Name', 'tags']]\nnew_df['tags'] = new_df['tags'].apply(lambda x: \" \".join(x))\nnew_df['tags'] = new_df['tags'].apply(lambda x: x.lower())\n# Fixing import statement for PorterStemmer\nps = PorterStemmer()\n# Fixing import statement for CountVectorizer\ncv = CountVectorizer(stop_words='english', max_features=5000)\ndef stem(text):\n    y = []\n    for i in text.split():",
+        "detail": "Recsystem",
+        "documentation": {}
+    },
+    {
+        "label": "new_df['tags']",
+        "kind": 5,
+        "importPath": "Recsystem",
+        "description": "Recsystem",
+        "peekOfCode": "new_df['tags'] = new_df['tags'].apply(lambda x: \" \".join(x))\nnew_df['tags'] = new_df['tags'].apply(lambda x: x.lower())\n# Fixing import statement for PorterStemmer\nps = PorterStemmer()\n# Fixing import statement for CountVectorizer\ncv = CountVectorizer(stop_words='english', max_features=5000)\ndef stem(text):\n    y = []\n    for i in text.split():\n        y.append(ps.stem(i))",
+        "detail": "Recsystem",
+        "documentation": {}
+    },
+    {
+        "label": "new_df['tags']",
+        "kind": 5,
+        "importPath": "Recsystem",
+        "description": "Recsystem",
+        "peekOfCode": "new_df['tags'] = new_df['tags'].apply(lambda x: x.lower())\n# Fixing import statement for PorterStemmer\nps = PorterStemmer()\n# Fixing import statement for CountVectorizer\ncv = CountVectorizer(stop_words='english', max_features=5000)\ndef stem(text):\n    y = []\n    for i in text.split():\n        y.append(ps.stem(i))\n    return \" \".join(y)",
+        "detail": "Recsystem",
+        "documentation": {}
+    },
+    {
+        "label": "ps",
+        "kind": 5,
+        "importPath": "Recsystem",
+        "description": "Recsystem",
+        "peekOfCode": "ps = PorterStemmer()\n# Fixing import statement for CountVectorizer\ncv = CountVectorizer(stop_words='english', max_features=5000)\ndef stem(text):\n    y = []\n    for i in text.split():\n        y.append(ps.stem(i))\n    return \" \".join(y)\nnew_df['tags'] = new_df['tags'].apply(stem)\nvectors = cv.fit_transform(new_df['tags']).toarray()",
+        "detail": "Recsystem",
+        "documentation": {}
+    },
+    {
+        "label": "cv",
+        "kind": 5,
+        "importPath": "Recsystem",
+        "description": "Recsystem",
+        "peekOfCode": "cv = CountVectorizer(stop_words='english', max_features=5000)\ndef stem(text):\n    y = []\n    for i in text.split():\n        y.append(ps.stem(i))\n    return \" \".join(y)\nnew_df['tags'] = new_df['tags'].apply(stem)\nvectors = cv.fit_transform(new_df['tags']).toarray()\n# Fixing indentation and syntax errors in the code block\nsimilarity = cosine_similarity(vectors)",
+        "detail": "Recsystem",
+        "documentation": {}
+    },
+    {
+        "label": "new_df['tags']",
+        "kind": 5,
+        "importPath": "Recsystem",
+        "description": "Recsystem",
+        "peekOfCode": "new_df['tags'] = new_df['tags'].apply(stem)\nvectors = cv.fit_transform(new_df['tags']).toarray()\n# Fixing indentation and syntax errors in the code block\nsimilarity = cosine_similarity(vectors)\nprint(similarity[1])\ndef recommended(medicine):\n    medicine_index = new_df[new_df['Drug, Name'] == medicine].index[0]\n    distances = similarity[medicine_index]\n    medicines_list = sorted(list(enumerate(distances)), reverse=True, key=lambda x: x[1])[1:6]\n    for i in medicines_list:",
+        "detail": "Recsystem",
+        "documentation": {}
+    },
+    {
+        "label": "vectors",
+        "kind": 5,
+        "importPath": "Recsystem",
+        "description": "Recsystem",
+        "peekOfCode": "vectors = cv.fit_transform(new_df['tags']).toarray()\n# Fixing indentation and syntax errors in the code block\nsimilarity = cosine_similarity(vectors)\nprint(similarity[1])\ndef recommended(medicine):\n    medicine_index = new_df[new_df['Drug, Name'] == medicine].index[0]\n    distances = similarity[medicine_index]\n    medicines_list = sorted(list(enumerate(distances)), reverse=True, key=lambda x: x[1])[1:6]\n    for i in medicines_list:\n        print(new_df.iloc[i[0]]['Drug, Name'])",
+        "detail": "Recsystem",
+        "documentation": {}
+    },
+    {
+        "label": "similarity",
+        "kind": 5,
+        "importPath": "Recsystem",
+        "description": "Recsystem",
+        "peekOfCode": "similarity = cosine_similarity(vectors)\nprint(similarity[1])\ndef recommended(medicine):\n    medicine_index = new_df[new_df['Drug, Name'] == medicine].index[0]\n    distances = similarity[medicine_index]\n    medicines_list = sorted(list(enumerate(distances)), reverse=True, key=lambda x: x[1])[1:6]\n    for i in medicines_list:\n        print(new_df.iloc[i[0]]['Drug, Name'])\nrecommended(\"MontekLC 75mg Syrup 60mlMontekLC 500mg Tablet 10's\")\n# Correcting import statement for PorterStemmer",
+        "detail": "Recsystem",
+        "documentation": {}
+    },
+    {
+        "label": "printBoard",
+        "kind": 2,
+        "importPath": "Tictactoe",
+        "description": "Tictactoe",
+        "peekOfCode": "def printBoard(board):\n    print(board[0] +\" | \" + board[1] + \" | \" + board[2])\n    print(\"-----------\")\n    print(board[3] +\" | \" + board[4] + \" | \" + board[5])\n    print(\"------------\")\n    print(board[6] +\" | \" + board[7] + \" | \" + board[8])\nprintBoard(board)\n#take player input\ndef playerInput(board):\n    inp=int(input(\"Enter a number 1-9:\"))",
+        "detail": "Tictactoe",
+        "documentation": {}
+    },
+    {
+        "label": "playerInput",
+        "kind": 2,
+        "importPath": "Tictactoe",
+        "description": "Tictactoe",
+        "peekOfCode": "def playerInput(board):\n    inp=int(input(\"Enter a number 1-9:\"))\n    if inp>=1 and inp<=9 and board[inp-1]==\"-\":\n        board[inp-1]=currentPlayer\n    else:\n        print(\"Oops player is already in that spot!\")\n# check for win or tie\ndef checkHorizontal(board):\n    global winner\n    if board[0]==board[1]==board[2] and board[1] !=\"-\":",
+        "detail": "Tictactoe",
+        "documentation": {}
+    },
+    {
+        "label": "checkHorizontal",
+        "kind": 2,
+        "importPath": "Tictactoe",
+        "description": "Tictactoe",
+        "peekOfCode": "def checkHorizontal(board):\n    global winner\n    if board[0]==board[1]==board[2] and board[1] !=\"-\":\n        winner=board[0]\n        return True\n    elif board[3]==board[4]==board[5] and board[3] !=\"-\":\n        winner=board[3]\n        return True\n    elif board[6]==board[7]==board[8] and board[6] !=\"-\":\n        winner=board[6]",
+        "detail": "Tictactoe",
+        "documentation": {}
+    },
+    {
+        "label": "chekRow",
+        "kind": 2,
+        "importPath": "Tictactoe",
+        "description": "Tictactoe",
+        "peekOfCode": "def chekRow(board):\n    global winner\n    if board[0]==board[3]==board[6] and board[0] !=\"-\":\n        winner=board[0]\n        return True\n    elif board[1]==board[4]==board[7] and board[1] !=\"-\":\n        winner=board[1]\n        return True\n    elif board[2]==board[5]==board[8] and board[2] !=\"-\":\n        winner=board[2]",
+        "detail": "Tictactoe",
+        "documentation": {}
+    },
+    {
+        "label": "checkDiag",
+        "kind": 2,
+        "importPath": "Tictactoe",
+        "description": "Tictactoe",
+        "peekOfCode": "def checkDiag(board):\n    global winner\n    if board[0]==board[4]==board[8] and board[0] !=\"-\":\n        winner=board[0]\n        return True\n    elif board[2]==board[4]==board[6] and board[2] !=\"-\":\n        winner=board[2]\n        return True\ndef checkTie(board):\n    global gameRunning",
+        "detail": "Tictactoe",
+        "documentation": {}
+    },
+    {
+        "label": "checkTie",
+        "kind": 2,
+        "importPath": "Tictactoe",
+        "description": "Tictactoe",
+        "peekOfCode": "def checkTie(board):\n    global gameRunning\n    if \"-\" not in board:\n        printBoard(board)\n        print(\"It is a tie!\")\n        gameRunning=False\ndef checkWin():\n    if checkDiag(board) or checkHorizontal(board) or chekRow(board):\n        print(f\"The winner is {winner}\")  \n#switch the player",
+        "detail": "Tictactoe",
+        "documentation": {}
+    },
+    {
+        "label": "checkWin",
+        "kind": 2,
+        "importPath": "Tictactoe",
+        "description": "Tictactoe",
+        "peekOfCode": "def checkWin():\n    if checkDiag(board) or checkHorizontal(board) or chekRow(board):\n        print(f\"The winner is {winner}\")  \n#switch the player\ndef switchPlayer():\n    global currentPlayer\n    if currentPlayer==\"x\":\n        currentPlayer=\"0\"\n    else:\n        currentPlayer=\"x\"",
+        "detail": "Tictactoe",
+        "documentation": {}
+    },
+    {
+        "label": "switchPlayer",
+        "kind": 2,
+        "importPath": "Tictactoe",
+        "description": "Tictactoe",
+        "peekOfCode": "def switchPlayer():\n    global currentPlayer\n    if currentPlayer==\"x\":\n        currentPlayer=\"0\"\n    else:\n        currentPlayer=\"x\"\n# computer\ndef computer(board):\n    while currentPlayer==\"0\":\n        position=random.randint(0,8)",
+        "detail": "Tictactoe",
+        "documentation": {}
+    },
+    {
+        "label": "computer",
+        "kind": 2,
+        "importPath": "Tictactoe",
+        "description": "Tictactoe",
+        "peekOfCode": "def computer(board):\n    while currentPlayer==\"0\":\n        position=random.randint(0,8)\n        if board[position]==\"-\":\n            board[position]=\"0\"\n            switchPlayer()\n#check for win or tie again\nwhile gameRunning:\n    printBoard(board)\n    playerInput(board)",
+        "detail": "Tictactoe",
+        "documentation": {}
+    }
+]
